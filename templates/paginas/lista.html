@@ -1,0 +1,230 @@
+{% extends 'template.html' %} {% block content %}
+<script>
+    $(document).ready(function () {
+      $("#formulario_ordenar").submit(function (event) {
+        event.preventDefault();
+        create_ordenamiento();
+      });
+    });
+  
+    function create_ordenamiento() {
+      var metodo_ordenamiento = $("#metodo_ordenamiento").val();
+      var ascendente_descendente = $("#ascendente_descendente").val();
+      var atributo_ordenar = $("#atributo_ordenar").val();
+      var url = '/historial/ordenar/' + metodo_ordenamiento + '/' + ascendente_descendente + '/' + atributo_ordenar;
+
+      $.ajax({
+        method: "GET",
+        url: url,
+        dataType: "json",
+        success: function (data) {
+          console.log(data);
+          if (data.code == 200) {
+            let html = "";
+            $.each(data.data, function (i, item) {
+              html += '<tr class="text-white">';
+              html += '<td class="py-2 px-4 text-center">' + item.usuario + "</td>";
+              html += '<td class="py-2 px-4 text-center">' + item.email + "</td>";
+              html += '<td class="py-2 px-4 text-center">' + item.comando + "</td>";
+              html += '<td class="py-2 px-4 text-center">' + item.descripcion + "</td>";
+              html += '<td class="py-2 px-4 text-center">' + item.fecha + "</td>";
+              html += "</tr>";
+            });
+            $("#tabla tbody").html(html);
+          } 
+        }
+      })
+    }
+
+    $(document).ready(function () {
+      $("#formulario_busqueda").submit(function (event) {
+        event.preventDefault();
+        create_ordenamiento_busqueda();
+      });
+    });
+  
+    function create_ordenamiento_busqueda() {
+      var atributo_a_buscar = $("#atributo_a_buscar").val();
+      var lineal_o_binaria = $("#lineal_o_binaria").val();
+      var palabra_buscar = $("#palabra_buscar").val();
+      var url = '/historial/buscar/' + atributo_a_buscar + '/' + lineal_o_binaria + '/' + palabra_buscar;
+
+      $.ajax({
+        method: "GET",
+        url: url,
+        dataType: "json",
+        success: function (data) {
+          console.log(data);
+          if (data.code == 200) {
+            let html = "";
+            $.each(data.data, function (i, item) {
+              html += '<tr class="text-white">';
+              html += '<td class="py-2 px-4 text-center">' + item.usuario + "</td>";
+              html += '<td class="py-2 px-4 text-center">' + item.email + "</td>";
+              html += '<td class="py-2 px-4 text-center">' + item.comando + "</td>";
+              html += '<td class="py-2 px-4 text-center">' + item.descripcion + "</td>";
+              html += '<td class="py-2 px-4 text-center">' + item.fecha + "</td>";
+              html += "</tr>";
+            });
+            $("#tabla tbody").html(html);
+          } 
+        }
+      })
+    }
+  </script>
+
+<div class="grid grid-cols-7 gap-6">
+  <div class="col-span-5">
+    <h2
+      class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-6 text-indigo-400"
+    >
+      Comandos
+    </h2>
+
+    <div class="w-full flex justify-center mb-6">
+      <a
+        href="/historial/comando_nuevo"
+        class="inline-block bg-gray-800 p-4 rounded-md font-bold"
+      >
+        Agregar un Comando
+      </a>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table
+        id="tabla"
+        class="w-full whitespace-nowrap bg-black shadow-md border-collapse text-white"
+      >
+        <thead class="bg-gray-900">
+          <tr>
+            <th class="py-2 px-4 text-center">Usuario</th>
+            <th class="py-2 px-4 text-center">Email</th>
+            <th class="py-2 px-4 text-center">Comando</th>
+            <th class="py-2 px-4 text-center">Descripcion</th>
+            <th class="py-2 px-4 text-center">Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in lista %}
+          <tr>
+            <td class="py-2 px-4 text-center">{{ item.usuario }}</td>
+            <td class="py-2 px-4 text-center">{{ item.email }}</td>
+            <td class="py-2 px-4 text-center">{{ item.comando }}</td>
+            <td class="py-2 px-4 text-center">{{ item.descripcion }}</td>
+            <td class="py-2 px-4 text-center">{{ item.fecha }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-span-2 bg-gray-800 rounded-lg p-6">
+    <form id="formulario_ordenar" class="mb-6">
+      <div class="mb-4">
+        <label for="metodo_ordenamiento" class="block text-white font-bold mb-2"
+          >Metodo_ordenamiento</label
+        >
+        <select
+          id="metodo_ordenamiento"
+          name="metodo_ordenamiento"
+          class="form-select w-full rounded-lg p-2 bg-gray-900 text-white border-gray-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400"
+        >
+          <option value="shell">Metodo Shell Sort</option>
+          <option value="merge">Metodo Merge Sort</option>
+          <option value="quick">Metodo Quick Sort</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="ascendente_descendente" class="block text-white font-bold mb-2">Orden</label>
+        <select
+          id="ascendente_descendente"
+          name="ascendente_descendente"
+          class="form-select w-full rounded-lg p-2 bg-gray-900 text-white border-gray-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400"
+        >
+          <option value="1">Ordenamiento Ascendente</option>
+          <option value="2">Ordenamiento Descendente</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="atributo_ordenar" class="block text-white font-bold mb-2"
+          >Atributo</label
+        >
+        <select
+          id="atributo_ordenar"
+          name="atributo_ordenar"
+          class="form-select w-full rounded-lg p-2 bg-gray-900 text-white border-gray-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400"
+        >
+          <option value="usuario">Usuario</option>
+          <option value="email">Email</option>
+          <option value="comando">Comando</option>
+          <option value="descripcion">Descripcion</option>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        class="bg-black rounded-lg text-white font-bold py-2 px-4 w-full hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-opacity-50"
+      >
+        ORDENAR
+      </button>
+    </form>
+
+    <form id="formulario_busqueda" action="/usuarios/busqueda" method="GET">
+      <div class="mb-4">
+        <label for="atributo_a_buscar" class="block text-white font-bold mb-2"
+          >Atributo de Búsqueda</label
+        >
+        <select
+          id="atributo_a_buscar"
+          name="atributo_a_buscar"
+          class="form-select w-full rounded-lg p-2 bg-gray-900 text-white border-gray-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400"
+        >
+          <option value="usuario">Usuario</option>
+          <option value="email">Email</option>
+          <option value="comando">Comando</option>
+          <option value="descripcion">Descripcion</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="lineal_o_binaria" class="block text-white font-bold mb-2"
+          >Tipo de Búsqueda</label
+        >
+        <select
+          id="lineal_o_binaria"
+          name="lineal_o_binaria"
+          class="form-select w-full rounded-lg p-2 bg-gray-900 text-white border-gray-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400"
+        >
+          <option value="lbinaria">Búsqueda Lineal Binaria</option>
+          <option value="binaria">Búsqueda Binaria</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label for="palabra_buscar" class="block text-white font-bold mb-2"
+          >Valor a Buscar</label
+        >
+        <input
+          type="text"
+          id="palabra_buscar"
+          name="palabra_buscar"
+          placeholder="Valor a buscar"
+          class="form-input w-full p-2 rounded-lg bg-gray-900 text-white border-gray-700 focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400"
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="bg-black rounded-lg text-white font-bold py-2 px-4 w-full hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-opacity-50"
+      >
+        BUSCAR
+      </button>
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}

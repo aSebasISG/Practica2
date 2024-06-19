@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "usuario": "Smith",
+        "email": "smith@example.com",
+        "comando": "ckdir",
+        "descripcion": "muestra el directorio actual",
+        "fecha": "2024-06-18"
+    },
+    {
+        "id": 2,
+        "usuario": "Johnson",
+        "email": "johnson@example.com",
+        "comando": "ls",
+        "descripcion": "lista archivos y directorios",
+        "fecha": "2024-06-18"
+    },
+    {
+        "id": 3,
+        "usuario": "Williams",
+        "email": "williams@example.com",
+        "comando": "cd directorio",
+        "descripcion": "cambia al directorio especificado",
+        "fecha": "2024-06-18"
+    },
+    {
+        "id": 4,
+        "usuario": "Brown",
+        "email": "brown@example.com",
+        "comando": "mkdir carpeta",
+        "descripcion": "crea una nueva carpeta",
+        "fecha": "2024-06-18"
+    },
+    {
+        "id": 5,
+        "usuario": "Davis",
+        "email": "davis@example.com",
+        "comando": "touch archivo.txt",
+        "descripcion": "crea un nuevo archivo vacio",
+        "fecha": "2024-06-18"
+    },
+    {
+        "id": 6,
+        "usuario": "Miller",
+        "email": "miller@example.com",
+        "comando": "ls",
+        "descripcion": "nada_importante",
+        "fecha": "2024-06-18"
+    },
+    {
+        "id": 7,
+        "usuario": "Wilson",
+        "email": "wilson@example.com",
+        "comando": "echo 'Hola Mundo!'",
+        "descripcion": "imprime 'Hola Mundo!' en la consola",
+        "fecha": "2024-06-18"
+    },
+    {
+        "id": 8,
+        "usuario": "Moore",
+        "email": "davis@example.com",
+        "comando": "grep patron archivo.txt",
+        "descripcion": "busca un patron en un archivo",
+        "fecha": "2024-06-18"
+    },
+    {
+        "id": 9,
+        "usuario": "Taylor",
+        "email": "taylor@example.com",
+        "comando": "ls",
+        "descripcion": "cambia los permisos de un script",
+        "fecha": "2024-06-18"
+    },
+    {
+        "id": 10,
+        "usuario": "Smith",
+        "email": "smith@example.com",
+        "comando": "tar -czf archivo.tar.gz carpeta/",
+        "descripcion": "hola",
+        "fecha": "2024-06-18"
+    },
+    {
+        "id": 11,
+        "usuario": "Johnson",
+        "email": "davis@example.com",
+        "comando": "cp archivo.txt destino/",
+        "descripcion": "copia un archivo a un destino especifico",
+        "fecha": "2024-06-18"
+    },
+    {
+        "id": 12,
+        "usuario": "Johnson",
+        "email": "williams@example.com",
+        "comando": "mv archivo.txt nuevo_nombre.txt",
+        "descripcion": "renombrar un archivo",
+        "fecha": "2024-06-18"
+    },
+    {
+        "id": 13,
+        "usuario": "Brown",
+        "email": "brown@example.com",
+        "comando": "cat archivo.txt",
+        "descripcion": "muestra el contenido de un archivo",
+        "fecha": "2024-06-18"
+    },
+    {
+        "id": 14,
+        "usuario": "Davis",
+        "email": "davis@example.com",
+        "comando": "ls",
+        "descripcion": "nada_importante",
+        "fecha": "2024-06-18"
+    },
+    {
+        "id": 15,
+        "usuario": "Johnson",
+        "email": "miller@example.com",
+        "comando": "tail -n 20 archivo.txt",
+        "descripcion": "nada_importante",
+        "fecha": "2024-06-18"
+    }
+]
